@@ -1,0 +1,4 @@
+Note:
+
+This program needs at least Microsoft .NET 4.0
+Install it via Windows Update (or whatever) before you continue!

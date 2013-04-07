@@ -15,6 +15,7 @@ AppSupportURL=https://github.com/manufactory/TomTime
 AppUpdatesURL=https://github.com/manufactory/TomTime
 DefaultDirName={pf}\TomTime
 DefaultGroupName=TomTime
+InfoBeforeFile=dotNETnote.txt
 LicenseFile=..\COPYING.txt
 OutputBaseFilename=setup
 Compression=lzma
