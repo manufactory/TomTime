@@ -1,0 +1,6 @@
+﻿Features that could be implemented:
+.) Multilanguage support
+.) logging
+.) statistics
+
+They will be implemented if necessary, so don't wait for it.

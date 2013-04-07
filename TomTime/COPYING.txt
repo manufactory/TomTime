@@ -1,0 +1,3 @@
+﻿This software considered beerware.
+
+See:  http://en.wikipedia.org/wiki/Beerware
