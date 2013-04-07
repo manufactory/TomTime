@@ -132,7 +132,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="appointment-soon.ico" />
     <Content Include="COPYING.txt" />
     <Content Include="icons\appointment-soon.ico" />
     <Content Include="icons\appointment-soon.png" />
