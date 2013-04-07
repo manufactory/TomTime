@@ -44,4 +44,5 @@ build/
 *.vsp
 *.vspx
 
-
+# Inno Setup
+TomTime/scripts/Output/
