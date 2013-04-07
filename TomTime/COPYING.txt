@@ -1,3 +1,5 @@
 ﻿This software considered beerware.
 
 See:  http://en.wikipedia.org/wiki/Beerware
+
+The icons are CC BY-SA 3.0 (see the COPYING.txt file in the icons folder)
