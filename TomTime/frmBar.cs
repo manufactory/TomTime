@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.PowerPacks;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,7 +6,9 @@ namespace TomTime
 {
     public partial class frmBar : Form
     {
-        ShapeContainer canvas;
+        Graphics FormGraphics;
+        Pen Pen = new Pen(Color.Black, 1);
+
         PauseableTimer timer = new PauseableTimer();
 
         public frmBar()
@@ -18,6 +19,8 @@ namespace TomTime
         private void Bar_Load(object sender, EventArgs e)
         {
             UserSettings.LoadSettings(this);
+
+            FormGraphics = this.CreateGraphics();
 
             /*
              * Context menu
@@ -198,19 +201,14 @@ namespace TomTime
 
             this.DesktopLocation = new Point(xPos, yPos);
 
-            /*
-             * Draw Bar Seperatpors
-             */
+            int timerInterval = UserSettings.BarTime / this.Width;
+            timer.Interval = timerInterval;
 
-            //Remove old canvas (lines) if existing
-            if (this.canvas != null)
-            {
-                this.Controls.Remove(canvas);
-            }
+            this.BackColor = UserSettings.BarColor;
+        }
 
-            canvas = new ShapeContainer();
-            canvas.Parent = this;
-
+        private void frmBar_Paint(object sender, PaintEventArgs e)
+        {
             int lineX = 0;
 
             /*
@@ -220,19 +218,15 @@ namespace TomTime
 
             for (int i = 0; i < UserSettings.BarSeperators; i++)
             {
-                LineShape line = new LineShape();
-                line.Parent = canvas;
-
                 lineX += lineIntervall;
-
-                line.StartPoint = new System.Drawing.Point(lineX, 0);
-                line.EndPoint = new System.Drawing.Point(lineX, this.Height);
+                FormGraphics.DrawLine(Pen, lineX, 0, lineX, this.Height);
             }
+        }
 
-            int timerInterval = UserSettings.BarTime / this.Width;
-            timer.Interval = timerInterval;
-
-            this.BackColor = UserSettings.BarColor;
+        private void frmBar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Pen.Dispose();
+            FormGraphics.Dispose();
         }
     }
 }

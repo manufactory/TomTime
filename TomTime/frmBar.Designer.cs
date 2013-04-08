@@ -55,8 +55,10 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmBar_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmBar_FormClosed);
             this.Load += new System.EventHandler(this.Bar_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmBar_Paint);
             this.ResumeLayout(false);
 
         }
