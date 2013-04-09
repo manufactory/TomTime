@@ -74,5 +74,14 @@
     <Setting Name="BarHeight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
+    <Setting Name="BlinkingColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Yellow</Value>
+    </Setting>
+    <Setting Name="Blinking" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TimeToBlink" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

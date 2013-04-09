@@ -57,8 +57,12 @@ namespace TomTime
             this.btnColor.BackColor = UserSettings.BarColor;
             this.nudSeperators.Value = UserSettings.BarSeperators;
 
+            this.btnBlinkingColor.BackColor = UserSettings.BlinkingColor;
+            this.chkBlink.Checked = UserSettings.Blinking;
+
             this.nudMinutes.Value = UserSettings.BarTime / 60000;
             this.nudSeconds.Value = (UserSettings.BarTime / 1000) % 60;
+            this.nudBlinkMinutes.Value = UserSettings.TimeToBlink / 60000;
 
             Rectangle screen = Screen.PrimaryScreen.Bounds;
             this.nudLenght.Maximum = screen.Width;
@@ -294,10 +298,14 @@ namespace TomTime
                     UserSettings.Y = UserSettings.YPos.Bottom;
                 }
 
-                UserSettings.BarColor = this.btnColor.BackColor;
+                UserSettings.BarColor = btnColor.BackColor;
                 UserSettings.BarSeperators = Decimal.ToInt32(nudSeperators.Value);
 
                 UserSettings.BarTime = Decimal.ToInt32(nudMinutes.Value * 60000 + nudSeconds.Value * 1000);
+
+                UserSettings.Blinking = chkBlink.Checked;
+                UserSettings.TimeToBlink = UserSettings.BarTime - Decimal.ToInt32((nudBlinkMinutes.Value * 60000));
+                UserSettings.BlinkingColor = btnBlinkingColor.BackColor;
 
                 UserSettings.BarHeight = Decimal.ToInt32(nudHeight.Value);
                 UserSettings.BarWidth = Decimal.ToInt32(nudLenght.Value);
@@ -341,6 +349,19 @@ namespace TomTime
         private void txtHotkeyHide_DoubleClick(object sender, EventArgs e)
         {
             txtDoubleClick(this.txtHotkeyHide);
+        }
+
+        private void chkBlink_CheckedChanged(object sender, EventArgs e)
+        {
+            btnBlinkingColor.Enabled = btnBlinkingColor.Enabled ? false : true;
+        }
+
+        private void btnBlinkingColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.ShowDialog();
+            btnBlinkingColor.BackColor = cd.Color;
+            UserSettings.BlinkingColor = cd.Color;
         }
     }
 }

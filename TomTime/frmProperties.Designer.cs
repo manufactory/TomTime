@@ -56,6 +56,11 @@
             this.nudLenght = new System.Windows.Forms.NumericUpDown();
             this.nudHeight = new System.Windows.Forms.NumericUpDown();
             this.lblHeight = new System.Windows.Forms.Label();
+            this.chkBlink = new System.Windows.Forms.CheckBox();
+            this.btnBlinkingColor = new System.Windows.Forms.Button();
+            this.lblBlinkingColor = new System.Windows.Forms.Label();
+            this.lblBlinkMinutes = new System.Windows.Forms.Label();
+            this.nudBlinkMinutes = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetTop)).BeginInit();
@@ -63,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSeperators)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLenght)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkMinutes)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -328,10 +334,68 @@
             this.lblHeight.TabIndex = 27;
             this.lblHeight.Text = "Height";
             // 
+            // chkBlink
+            // 
+            this.chkBlink.AutoSize = true;
+            this.chkBlink.Checked = true;
+            this.chkBlink.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBlink.Location = new System.Drawing.Point(320, 52);
+            this.chkBlink.Name = "chkBlink";
+            this.chkBlink.Size = new System.Drawing.Size(63, 17);
+            this.chkBlink.TabIndex = 31;
+            this.chkBlink.Text = "Blinking";
+            this.chkBlink.UseVisualStyleBackColor = true;
+            this.chkBlink.CheckedChanged += new System.EventHandler(this.chkBlink_CheckedChanged);
+            // 
+            // btnBlinkingColor
+            // 
+            this.btnBlinkingColor.BackColor = System.Drawing.Color.IndianRed;
+            this.btnBlinkingColor.Location = new System.Drawing.Point(320, 23);
+            this.btnBlinkingColor.Name = "btnBlinkingColor";
+            this.btnBlinkingColor.Size = new System.Drawing.Size(46, 23);
+            this.btnBlinkingColor.TabIndex = 33;
+            this.btnBlinkingColor.UseVisualStyleBackColor = false;
+            this.btnBlinkingColor.Click += new System.EventHandler(this.btnBlinkingColor_Click);
+            // 
+            // lblBlinkingColor
+            // 
+            this.lblBlinkingColor.AutoSize = true;
+            this.lblBlinkingColor.Location = new System.Drawing.Point(317, 7);
+            this.lblBlinkingColor.Name = "lblBlinkingColor";
+            this.lblBlinkingColor.Size = new System.Drawing.Size(70, 13);
+            this.lblBlinkingColor.TabIndex = 32;
+            this.lblBlinkingColor.Text = "Blinking color";
+            // 
+            // lblBlinkMinutes
+            // 
+            this.lblBlinkMinutes.AutoSize = true;
+            this.lblBlinkMinutes.Location = new System.Drawing.Point(251, 88);
+            this.lblBlinkMinutes.Name = "lblBlinkMinutes";
+            this.lblBlinkMinutes.Size = new System.Drawing.Size(115, 13);
+            this.lblBlinkMinutes.TabIndex = 35;
+            this.lblBlinkMinutes.Text = "Blink the last n minutes";
+            // 
+            // nudBlinkMinutes
+            // 
+            this.nudBlinkMinutes.Location = new System.Drawing.Point(324, 104);
+            this.nudBlinkMinutes.Maximum = new decimal(new int[] {
+            1560,
+            0,
+            0,
+            0});
+            this.nudBlinkMinutes.Name = "nudBlinkMinutes";
+            this.nudBlinkMinutes.Size = new System.Drawing.Size(42, 20);
+            this.nudBlinkMinutes.TabIndex = 34;
+            // 
             // frmProperties
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.ClientSize = new System.Drawing.Size(399, 289);
+            this.Controls.Add(this.lblBlinkMinutes);
+            this.Controls.Add(this.nudBlinkMinutes);
+            this.Controls.Add(this.btnBlinkingColor);
+            this.Controls.Add(this.lblBlinkingColor);
+            this.Controls.Add(this.chkBlink);
             this.Controls.Add(this.lblLength);
             this.Controls.Add(this.nudLenght);
             this.Controls.Add(this.nudHeight);
@@ -372,6 +436,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSeperators)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLenght)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkMinutes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,5 +472,10 @@
         private System.Windows.Forms.NumericUpDown nudLenght;
         private System.Windows.Forms.NumericUpDown nudHeight;
         private System.Windows.Forms.Label lblHeight;
+        private System.Windows.Forms.CheckBox chkBlink;
+        private System.Windows.Forms.Button btnBlinkingColor;
+        private System.Windows.Forms.Label lblBlinkingColor;
+        private System.Windows.Forms.Label lblBlinkMinutes;
+        private System.Windows.Forms.NumericUpDown nudBlinkMinutes;
     }
 }

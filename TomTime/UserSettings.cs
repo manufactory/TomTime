@@ -18,6 +18,9 @@ namespace TomTime
         static internal int BarHeight;
         static internal int BarSeperators;
         static internal Color BarColor;
+        static internal Color BlinkingColor;
+        static internal bool Blinking;
+        static internal int TimeToBlink;
 
         static internal Hotkey HotkeyStart;
         static internal Hotkey HotkeyPause;
@@ -37,6 +40,9 @@ namespace TomTime
             BarWidth = Properties.Settings.Default.BarWidth;
             BarSeperators = Properties.Settings.Default.BarSeperators;
             BarColor = Properties.Settings.Default.BarColor;
+            BlinkingColor = Properties.Settings.Default.BlinkingColor;
+            Blinking = Properties.Settings.Default.Blinking;
+            TimeToBlink = Properties.Settings.Default.TimeToBlink;
 
             HotkeyStart = new Hotkey();
             HotkeyStart.KeyCode = Properties.Settings.Default.HotkeyStartKeycode;
@@ -74,6 +80,9 @@ namespace TomTime
             Properties.Settings.Default.BarHeight = BarHeight;
             Properties.Settings.Default.BarSeperators = BarSeperators;
             Properties.Settings.Default.BarColor = BarColor;
+            Properties.Settings.Default.BlinkingColor = BlinkingColor;
+            Properties.Settings.Default.Blinking = Blinking;
+            Properties.Settings.Default.TimeToBlink = TimeToBlink;
 
             Properties.Settings.Default.HotkeyStartKeycode = HotkeyStart.KeyCode;
             Properties.Settings.Default.HotkeyStartControl = HotkeyStart.Control;

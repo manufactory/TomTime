@@ -9,12 +9,16 @@ namespace TomTime
         Graphics FormGraphics;
         Pen Pen = new Pen(Color.Black, 1);
 
-        PauseableTimer timer = new PauseableTimer();
+        PauseableTimer Timer = new PauseableTimer();
+        PauseableTimer BlinkTimer = new PauseableTimer();
+
+        const int BlinkInvervall = 300;
 
         public frmBar()
         {
             InitializeComponent();
             this.DoubleClick += new EventHandler(Restart);
+
         }
 
         private void Bar_Load(object sender, EventArgs e)
@@ -79,8 +83,10 @@ namespace TomTime
             tmenu.MenuItems.Add(tmi2);
             this.niTray.ContextMenu = tmenu;
 
-            timer.Tick += new EventHandler(timer_Tick);
-
+            Timer.Tick += new EventHandler(Timer_Tick);
+            BlinkTimer.Tick += new EventHandler(BlinkTimer_tick);
+            BlinkTimer.Interval = UserSettings.TimeToBlink;
+           
             UserSettings.HotkeyStart.Pressed += delegate
             {
                 Restart();
@@ -99,7 +105,7 @@ namespace TomTime
             ApplySettings();
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        void Timer_Tick(object sender, EventArgs e)
         {
             this.Width--;
 
@@ -109,8 +115,22 @@ namespace TomTime
              */
             if (this.Width == 2)
             {
-                timer.Stop();
+                Timer.Stop();
                 this.Visible = false;
+            }
+        }
+
+        void BlinkTimer_tick(object sender, EventArgs e)
+        {
+            this.BlinkTimer.Interval = BlinkInvervall;
+
+            if (this.BackColor == UserSettings.BlinkingColor)
+            {
+                this.BackColor = UserSettings.BarColor;
+            }
+            else
+            {
+                this.BackColor = UserSettings.BlinkingColor;
             }
         }
 
@@ -121,7 +141,8 @@ namespace TomTime
             UserSettings.HotkeyHide.Unregister();
         }
 
-        internal void Restart(object sender, EventArgs e) {
+        internal void Restart(object sender, EventArgs e)
+        {
             this.Restart();
         }
 
@@ -132,20 +153,25 @@ namespace TomTime
                 this.Visible = true;
             }
 
-            this.timer.Stop();
+            this.Timer.Stop();
+            this.BlinkTimer.Stop();
             this.Width = UserSettings.BarWidth;
-            this.timer.Start();
+            this.Timer.Start();
+            this.BlinkTimer.Start();
+            this.BlinkTimer.Interval = UserSettings.TimeToBlink;
         }
 
         internal void TogglePause()
         {
-            if (timer.Enabled)
+            if (Timer.Enabled)
             {
-                timer.Pause();
+                Timer.Pause();
+                BlinkTimer.Pause();
             }
             else
             {
-                timer.Resume();
+                Timer.Resume();
+                BlinkTimer.Pause();
             }
         }
 
@@ -161,7 +187,9 @@ namespace TomTime
                 this.Visible = true;
             }
 
-            this.timer.Stop();
+            this.Timer.Stop();
+            this.BlinkTimer.Stop();
+            this.BlinkTimer.Interval = UserSettings.TimeToBlink;
             this.Width = UserSettings.BarWidth;
         }
 
@@ -207,7 +235,7 @@ namespace TomTime
             this.DesktopLocation = new Point(xPos, yPos);
 
             int timerInterval = UserSettings.BarTime / this.Width;
-            timer.Interval = timerInterval;
+            Timer.Interval = timerInterval;
 
             this.BackColor = UserSettings.BarColor;
 
@@ -218,7 +246,7 @@ namespace TomTime
         {
             int lineX = 0;
 
-            int lineIntervall = this.Width / UserSettings.BarSeperators;
+            int lineIntervall = UserSettings.BarWidth / UserSettings.BarSeperators;
 
             for (int i = 0; i < UserSettings.BarSeperators; i++)
             {
