@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace TomTime
 {
+    /*
+     *Wrapper class around .NET Properties.Settings
+     */
     internal static class UserSettings
     {
         internal enum XPos { Left, Right }
@@ -62,6 +65,34 @@ namespace TomTime
 
         internal static void SaveSettings()
         {
+            Properties.Settings.Default.XPos = (int)X;
+            Properties.Settings.Default.YPos = (int)Y;
+            Properties.Settings.Default.XOffset = XOffset;
+            Properties.Settings.Default.YOffset = YOffset;
+            Properties.Settings.Default.BarTime = BarTime;
+            Properties.Settings.Default.BarWidth = BarWidth;
+            Properties.Settings.Default.BarHeight = BarHeight;
+            Properties.Settings.Default.BarSeperators = BarSeperators;
+            Properties.Settings.Default.BarColor = BarColor;
+
+            Properties.Settings.Default.HotkeyStartKeycode = HotkeyStart.KeyCode;
+            Properties.Settings.Default.HotkeyStartControl = HotkeyStart.Control;
+            Properties.Settings.Default.HotkeyStartShift = HotkeyStart.Shift;
+            Properties.Settings.Default.HotkeyStartAlt = HotkeyStart.Alt;
+            Properties.Settings.Default.HotkeyStartWin = HotkeyStart.Windows;
+
+            Properties.Settings.Default.HotkeyPauseKeycode = HotkeyPause.KeyCode;
+            Properties.Settings.Default.HotkeyPauseControl = HotkeyPause.Control;
+            Properties.Settings.Default.HotkeyPauseShift = HotkeyPause.Shift;
+            Properties.Settings.Default.HotkeyPauseAlt = HotkeyPause.Alt;
+            Properties.Settings.Default.HotkeyPauseWin = HotkeyPause.Windows;
+
+            Properties.Settings.Default.HotkeyHideKeycode = HotkeyHide.KeyCode;
+            Properties.Settings.Default.HotkeyHideControl = HotkeyHide.Control;
+            Properties.Settings.Default.HotkeyHideShift = HotkeyHide.Shift;
+            Properties.Settings.Default.HotkeyHideAlt = HotkeyHide.Alt;
+            Properties.Settings.Default.HotkeyHideWin = HotkeyHide.Windows;
+
             Properties.Settings.Default.Save();
         }
     }
