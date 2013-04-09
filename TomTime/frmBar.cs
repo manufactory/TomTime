@@ -218,10 +218,7 @@ namespace TomTime
         {
             int lineX = 0;
 
-            /*
-             * width + 2, because winforms just can not get a width , 2
-             */
-            int lineIntervall = (this.Width + 2) / (UserSettings.BarSeperators + 1);
+            int lineIntervall = this.Width / UserSettings.BarSeperators;
 
             for (int i = 0; i < UserSettings.BarSeperators; i++)
             {
