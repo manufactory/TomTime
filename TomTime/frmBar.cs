@@ -32,23 +32,36 @@ namespace TomTime
              */
             ContextMenu cmenu = new ContextMenu();
 
-            MenuItem mi0 = new MenuItem();
-            mi0.Text = "Properties";
-            mi0.Click += delegate
+            MenuItem mi0 = new MenuItem("Start / Restart");
+            mi0.Click += new EventHandler(Restart);
+            cmenu.MenuItems.Add(mi0);
+
+            MenuItem mi1 = new MenuItem("Pause / Resume");
+            mi1.Click += new EventHandler(TogglePause);
+            cmenu.MenuItems.Add(mi1);
+
+            MenuItem mi2 = new MenuItem("Hide");
+            mi2.Click += new EventHandler(ToggleHide);
+            cmenu.MenuItems.Add(mi2);
+            cmenu.MenuItems.Add("-");
+
+            MenuItem mi3 = new MenuItem();
+            mi3.Text = "Properties";
+            mi3.Click += delegate
             {
                 this.Reset();
                 Form prop = new frmProperties(this);
                 prop.ShowDialog();
             };
-            cmenu.MenuItems.Add(mi0);
+            cmenu.MenuItems.Add(mi3);
 
-            MenuItem mi1 = new MenuItem();
-            mi1.Text = "Close";
-            mi1.Click += delegate
+            MenuItem mi4 = new MenuItem();
+            mi4.Text = "Close";
+            mi4.Click += delegate
             {
                 this.Close();
             };
-            cmenu.MenuItems.Add(mi1);
+            cmenu.MenuItems.Add(mi4);
 
             this.ContextMenu = cmenu;
 
@@ -57,30 +70,44 @@ namespace TomTime
              */
             ContextMenu tmenu = new ContextMenu();
 
-            MenuItem tmi0 = new MenuItem("Properties");
-            tmi0.Click += delegate
+            MenuItem tmi0 = new MenuItem("Start / Restart");
+            tmi0.Click += new EventHandler(Restart);
+            tmenu.MenuItems.Add(tmi0);
+
+            MenuItem tmi1 = new MenuItem("Pause / Resume");
+            tmi1.Click += new EventHandler(TogglePause);
+            tmenu.MenuItems.Add(tmi1);
+
+            MenuItem tmi2 = new MenuItem("Hide");
+            tmi2.Click += new EventHandler(ToggleHide);
+            tmenu.MenuItems.Add(tmi2);
+            tmenu.MenuItems.Add("-");
+
+            MenuItem tmi3 = new MenuItem("Properties");
+            tmi3.Click += delegate
             {
                 Reset();
                 Form prop = new frmProperties(this);
                 prop.ShowDialog();
             };
-            tmenu.MenuItems.Add(tmi0);
+            tmenu.MenuItems.Add(tmi3);
             tmenu.MenuItems.Add("-");
 
-            MenuItem tmi1 = new MenuItem("About");
-            tmi1.Click += delegate
+            MenuItem tmi4 = new MenuItem("About");
+            tmi4.Click += delegate
             {
                 Form about = new frmAbout();
                 about.ShowDialog();
             };
-            tmenu.MenuItems.Add(tmi1);
+            tmenu.MenuItems.Add(tmi4);
 
-            MenuItem tmi2 = new MenuItem("Close");
-            tmi2.Click += delegate
+            MenuItem tmi5 = new MenuItem("Close");
+            tmi5.Click += delegate
             {
                 this.Close();
             };
-            tmenu.MenuItems.Add(tmi2);
+            tmenu.MenuItems.Add(tmi5);
+
             this.niTray.ContextMenu = tmenu;
 
             Timer.Tick += new EventHandler(Timer_Tick);
@@ -161,6 +188,11 @@ namespace TomTime
             this.BlinkTimer.Interval = UserSettings.TimeToBlink;
         }
 
+        internal void TogglePause(object sender, EventArgs e)
+        {
+            this.TogglePause();
+        }
+
         internal void TogglePause()
         {
             if (Timer.Enabled)
@@ -173,6 +205,11 @@ namespace TomTime
                 Timer.Resume();
                 BlinkTimer.Pause();
             }
+        }
+
+        internal void ToggleHide(object sender, EventArgs e)
+        {
+            this.ToggleHide();
         }
 
         internal void ToggleHide()
