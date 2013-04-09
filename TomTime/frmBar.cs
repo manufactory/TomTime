@@ -205,6 +205,8 @@ namespace TomTime
             timer.Interval = timerInterval;
 
             this.BackColor = UserSettings.BarColor;
+
+            this.Refresh(); //redraw so the paintevent is raised
         }
 
         private void frmBar_Paint(object sender, PaintEventArgs e)
@@ -227,6 +229,11 @@ namespace TomTime
         {
             Pen.Dispose();
             FormGraphics.Dispose();
+        }
+
+        private void frmBar_DoubleClick(object sender, EventArgs e)
+        {
+
         }
     }
 }
