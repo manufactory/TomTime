@@ -232,10 +232,5 @@ namespace TomTime
             Pen.Dispose();
             FormGraphics.Dispose();
         }
-
-        private void frmBar_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
     }
 }
