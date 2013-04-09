@@ -14,6 +14,7 @@ namespace TomTime
         public frmBar()
         {
             InitializeComponent();
+            this.DoubleClick += new EventHandler(Restart);
         }
 
         private void Bar_Load(object sender, EventArgs e)
@@ -118,6 +119,10 @@ namespace TomTime
             UserSettings.HotkeyStart.Unregister();
             UserSettings.HotkeyPause.Unregister();
             UserSettings.HotkeyHide.Unregister();
+        }
+
+        internal void Restart(object sender, EventArgs e) {
+            this.Restart();
         }
 
         internal void Restart()
