@@ -363,5 +363,18 @@ namespace TomTime
             btnBlinkingColor.BackColor = cd.Color;
             UserSettings.BlinkingColor = cd.Color;
         }
+
+        private void nudBlinkMinutes_ValueChanged(object sender, EventArgs e)
+        {
+            if (nudBlinkMinutes.Value > nudMinutes.Value) {
+                MessageBox.Show("Value bigger than minutes!","",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                
+                if(nudMinutes.Value > 0) {
+                    nudBlinkMinutes.Value = nudMinutes.Value - 1;
+                } else {
+                    nudBlinkMinutes.Value = 0;
+                }
+            }
+        }
     }
 }
