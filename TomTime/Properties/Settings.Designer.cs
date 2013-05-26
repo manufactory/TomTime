@@ -337,13 +337,37 @@ namespace TomTime.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("60000")]
         public int TimeToBlink {
             get {
                 return ((int)(this["TimeToBlink"]));
             }
             set {
                 this["TimeToBlink"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fuchsia")]
+        public global::System.Drawing.Color CountBackColor {
+            get {
+                return ((global::System.Drawing.Color)(this["CountBackColor"]));
+            }
+            set {
+                this["CountBackColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CountBack {
+            get {
+                return ((bool)(this["CountBack"]));
+            }
+            set {
+                this["CountBack"] = value;
             }
         }
     }

@@ -81,7 +81,13 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="TimeToBlink" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3000</Value>
+      <Value Profile="(Default)">60000</Value>
+    </Setting>
+    <Setting Name="CountBackColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Fuchsia</Value>
+    </Setting>
+    <Setting Name="CountBack" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

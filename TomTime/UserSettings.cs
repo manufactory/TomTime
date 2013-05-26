@@ -21,6 +21,8 @@ namespace TomTime
         static internal Color BlinkingColor;
         static internal bool Blinking;
         static internal int TimeToBlink;
+        static internal bool CountBack;
+        static internal Color CountBackColor;
 
         static internal Hotkey HotkeyStart;
         static internal Hotkey HotkeyPause;
@@ -43,6 +45,8 @@ namespace TomTime
             BlinkingColor = Properties.Settings.Default.BlinkingColor;
             Blinking = Properties.Settings.Default.Blinking;
             TimeToBlink = Properties.Settings.Default.TimeToBlink;
+            CountBack = Properties.Settings.Default.CountBack;
+            CountBackColor = Properties.Settings.Default.CountBackColor;
 
             HotkeyStart = new Hotkey();
             HotkeyStart.KeyCode = Properties.Settings.Default.HotkeyStartKeycode;
@@ -83,6 +87,8 @@ namespace TomTime
             Properties.Settings.Default.BlinkingColor = BlinkingColor;
             Properties.Settings.Default.Blinking = Blinking;
             Properties.Settings.Default.TimeToBlink = TimeToBlink;
+            Properties.Settings.Default.CountBack = CountBack;
+            Properties.Settings.Default.CountBackColor = CountBackColor;
 
             Properties.Settings.Default.HotkeyStartKeycode = HotkeyStart.KeyCode;
             Properties.Settings.Default.HotkeyStartControl = HotkeyStart.Control;

@@ -223,6 +223,7 @@
             this.btnCountBackwardsColor.Size = new System.Drawing.Size(46, 23);
             this.btnCountBackwardsColor.TabIndex = 37;
             this.btnCountBackwardsColor.UseVisualStyleBackColor = false;
+            this.btnCountBackwardsColor.Click += new System.EventHandler(this.btnCountBackwardsColor_Click);
             // 
             // lblCountBackwardsColor
             // 

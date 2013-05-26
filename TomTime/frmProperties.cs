@@ -60,6 +60,9 @@ namespace TomTime
             this.btnBlinkingColor.BackColor = UserSettings.BlinkingColor;
             this.chkBlink.Checked = UserSettings.Blinking;
 
+            this.chkCountBack.Checked = UserSettings.CountBack;
+            this.btnCountBackwardsColor.BackColor = UserSettings.CountBackColor;
+
             this.nudMinutes.Value = UserSettings.BarTime / 60000;
             this.nudSeconds.Value = (UserSettings.BarTime / 1000) % 60;
             this.nudBlinkMinutes.Value = UserSettings.TimeToBlink / 60000;
@@ -307,6 +310,9 @@ namespace TomTime
                 UserSettings.TimeToBlink = UserSettings.BarTime - Decimal.ToInt32((nudBlinkMinutes.Value * 60000));
                 UserSettings.BlinkingColor = btnBlinkingColor.BackColor;
 
+                UserSettings.CountBack = this.chkCountBack.Checked;
+                UserSettings.CountBackColor = this.btnCountBackwardsColor.BackColor;
+
                 UserSettings.BarHeight = Decimal.ToInt32(nudHeight.Value);
                 UserSettings.BarWidth = Decimal.ToInt32(nudLenght.Value);
 
@@ -333,7 +339,6 @@ namespace TomTime
             ColorDialog cd = new ColorDialog();
             cd.ShowDialog();
             btnColor.BackColor = cd.Color;
-            UserSettings.BarColor = cd.Color;
         }
 
         private void txtHotkeyStart_DoubleClick(object sender, EventArgs e)
@@ -361,7 +366,13 @@ namespace TomTime
             ColorDialog cd = new ColorDialog();
             cd.ShowDialog();
             btnBlinkingColor.BackColor = cd.Color;
-            UserSettings.BlinkingColor = cd.Color;
+        }
+
+        private void btnCountBackwardsColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.ShowDialog();
+            btnCountBackwardsColor.BackColor = cd.Color;
         }
 
         private void nudBlinkMinutes_ValueChanged(object sender, EventArgs e)
