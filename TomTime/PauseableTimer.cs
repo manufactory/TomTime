@@ -8,6 +8,18 @@ namespace TomTime
         DateTime PausedTime;
         int NormalInterval;
 
+        /*
+         * this is because a Blinking timer should _not_
+         * be restored to it original state, it is set 
+         * to the blinking intervall, when the rest time
+         * has passed, instead */
+        internal bool RestoreTimeAfterPause = true;
+        
+        public PauseableTimer()
+        {
+
+        }
+
         public void Pause()
         {
             PausedTime = DateTime.Now;
@@ -18,10 +30,17 @@ namespace TomTime
         public void Resume()
         {
             TimeSpan offset = DateTime.Now - PausedTime;
-            TimeSpan tick = TimeSpan.FromMilliseconds(NormalInterval - (offset.Milliseconds % NormalInterval));
+            TimeSpan tick = TimeSpan.FromMilliseconds(NormalInterval - (offset.TotalMilliseconds % NormalInterval));
 
-            this.Tick += new EventHandler(this.Offset_Tick);
-            this.Interval = offset.Milliseconds;
+            if (RestoreTimeAfterPause)
+            {
+                this.Tick += new EventHandler(this.Offset_Tick);
+            }
+
+
+            this.Interval = Convert.ToInt32(tick.TotalMilliseconds);
+            //this.Interval = Convert.ToInt32(offset.TotalMilliseconds);
+            //this.Interval = offset.Milliseconds;
 
             this.Start();
         }
