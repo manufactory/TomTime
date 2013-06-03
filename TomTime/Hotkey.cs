@@ -169,6 +169,7 @@ namespace MovablePython
 			this.Register(windowControl);
 		}
 
+        [System.Diagnostics.DebuggerHidden()]
 		public bool PreFilterMessage(ref Message message)
 		{
 			// Only process WM_HOTKEY messages
