@@ -10,20 +10,38 @@ namespace TomTime
         Pen Pen = new Pen(Color.Black, 1);
 
         PauseableTimer Timer = new PauseableTimer();
-        PauseableTimer BlinkTimer = new PauseableTimer();
+        PauseableTimer BlinkTimer;
+        Timer CountBackTimer;
+
+        int CountBackSeconds = 0;
 
         const int BlinkInvervall = 300;
+
+        enum TimerDirection { DOWNWARDS, UPWARDS };
+        TimerDirection BarDirection = TimerDirection.DOWNWARDS;
 
         public frmBar()
         {
             InitializeComponent();
             this.DoubleClick += new EventHandler(Restart);
-
         }
 
         private void Bar_Load(object sender, EventArgs e)
         {
             UserSettings.LoadSettings(this);
+
+            if (UserSettings.Blinking)
+            {
+                this.BlinkTimer = new PauseableTimer();
+                this.BlinkTimer.RestoreTimeAfterPause = false;
+            }
+
+            if (UserSettings.CountBack)
+            {
+                this.CountBackTimer = new Timer();
+                this.CountBackTimer.Tick += new EventHandler(CountBackTimer_tick);
+                this.CountBackTimer.Interval = 1000;
+            }
 
             FormGraphics = this.CreateGraphics();
 
@@ -111,9 +129,13 @@ namespace TomTime
             this.niTray.ContextMenu = tmenu;
 
             Timer.Tick += new EventHandler(Timer_Tick);
-            BlinkTimer.Tick += new EventHandler(BlinkTimer_tick);
-            BlinkTimer.Interval = UserSettings.TimeToBlink;
-           
+
+            if (UserSettings.Blinking)
+            {
+                BlinkTimer.Tick += new EventHandler(BlinkTimer_tick);
+                BlinkTimer.Interval = UserSettings.TimeToBlink;
+            }
+
             UserSettings.HotkeyStart.Pressed += delegate
             {
                 Restart();
@@ -134,7 +156,14 @@ namespace TomTime
 
         void Timer_Tick(object sender, EventArgs e)
         {
-            this.Width--;
+            if (this.BarDirection == TimerDirection.DOWNWARDS)
+            {
+                this.Width--;
+            }
+            else
+            {
+                this.Width++;
+            }
 
             /*
              * This is necessary because Winforms just do not make the Form width smaller than 2px.
@@ -142,8 +171,29 @@ namespace TomTime
              */
             if (this.Width == 2)
             {
+                if (UserSettings.CountBack)
+                {
+                    this.BackColor = UserSettings.CountBackColor;
+                    this.BarDirection = TimerDirection.UPWARDS;
+
+                    if (BlinkTimer != null) //TODO: make nicer
+                        this.BlinkTimer.Stop();
+
+                    this.lblCountBack.Visible = true;
+                    this.CountBackTimer.Start();
+                }
+                else
+                {
+                    Timer.Stop();
+                    this.Visible = false;
+                }
+            }
+
+            if (this.Width == UserSettings.BarWidth)
+            {
+                //TODO: Talk to customer
                 Timer.Stop();
-                this.Visible = false;
+                //CountBackTimer.Stop();
             }
         }
 
@@ -161,6 +211,37 @@ namespace TomTime
             }
         }
 
+        void CountBackTimer_tick(object sender, EventArgs e)
+        {
+            CountBackSeconds++;
+
+            int min = CountBackSeconds / 60;
+            int sec = CountBackSeconds % 60;
+
+            string str = "";
+            if (min < 10)
+            {
+                str += "0" + min;
+            }
+            else
+            {
+                str += min.ToString();
+            }
+
+            str += " : ";
+
+            if (sec < 10)
+            {
+                str += "0" + sec;
+            }
+            else
+            {
+                str += sec.ToString();
+            }
+
+            lblCountBack.Text = str;
+        }
+
         private void frmBar_FormClosed(object sender, FormClosedEventArgs e)
         {
             UserSettings.HotkeyStart.Unregister();
@@ -175,17 +256,33 @@ namespace TomTime
 
         internal void Restart()
         {
+            this.lblCountBack.Visible = false;
+            this.CountBackSeconds = 0;
+            this.CountBackTimer.Stop();
+            this.BackColor = UserSettings.BarColor;
+
             if (this.Visible == false)
             {
                 this.Visible = true;
             }
 
             this.Timer.Stop();
-            this.BlinkTimer.Stop();
-            this.Width = UserSettings.BarWidth;
+            //asking twice for blinking here, for clearness
+            //(may safe a functioncall, but depends on the compiler)
+            if (UserSettings.Blinking)
+            {
+                this.BlinkTimer.Stop();
+                this.Width = UserSettings.BarWidth;
+            }
+
+            this.BarDirection = TimerDirection.DOWNWARDS;
             this.Timer.Start();
-            this.BlinkTimer.Start();
-            this.BlinkTimer.Interval = UserSettings.TimeToBlink;
+
+            if (UserSettings.Blinking)
+            {
+                this.BlinkTimer.Interval = UserSettings.TimeToBlink;
+                this.BlinkTimer.Start();
+            }
         }
 
         internal void TogglePause(object sender, EventArgs e)
@@ -198,12 +295,18 @@ namespace TomTime
             if (Timer.Enabled)
             {
                 Timer.Pause();
-                BlinkTimer.Pause();
+                if (UserSettings.Blinking)
+                {
+                    BlinkTimer.Pause();
+                }
             }
             else
             {
                 Timer.Resume();
-                BlinkTimer.Pause();
+                if (UserSettings.Blinking)
+                {
+                    BlinkTimer.Resume();
+                }
             }
         }
 
@@ -225,8 +328,11 @@ namespace TomTime
             }
 
             this.Timer.Stop();
-            this.BlinkTimer.Stop();
-            this.BlinkTimer.Interval = UserSettings.TimeToBlink;
+            if (UserSettings.Blinking)
+            {
+                this.BlinkTimer.Stop();
+                this.BlinkTimer.Interval = UserSettings.TimeToBlink;
+            }
             this.Width = UserSettings.BarWidth;
         }
 
@@ -279,6 +385,7 @@ namespace TomTime
             this.Refresh(); //redraw so the paintevent is raised
         }
 
+        [System.Diagnostics.DebuggerHidden()]
         private void frmBar_Paint(object sender, PaintEventArgs e)
         {
             int lineX = 0;

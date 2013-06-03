@@ -31,12 +31,23 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBar));
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.lblCountBack = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // niTray
             // 
             this.niTray.Icon = ((System.Drawing.Icon)(resources.GetObject("niTray.Icon")));
             this.niTray.Visible = true;
+            // 
+            // lblCountBack
+            // 
+            this.lblCountBack.AutoSize = true;
+            this.lblCountBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountBack.Location = new System.Drawing.Point(12, 4);
+            this.lblCountBack.Name = "lblCountBack";
+            this.lblCountBack.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblCountBack.Size = new System.Drawing.Size(0, 17);
+            this.lblCountBack.TabIndex = 0;
             // 
             // frmBar
             // 
@@ -46,6 +57,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(360, 30);
             this.ControlBox = false;
+            this.Controls.Add(this.lblCountBack);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -60,12 +72,14 @@
             this.Load += new System.EventHandler(this.Bar_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmBar_Paint);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.NotifyIcon niTray;
+        private System.Windows.Forms.Label lblCountBack;
 
     }
 }
