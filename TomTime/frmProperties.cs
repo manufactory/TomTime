@@ -58,14 +58,23 @@ namespace TomTime
             this.nudSeperators.Value = UserSettings.BarSeperators;
 
             this.btnBlinkingColor.BackColor = UserSettings.BlinkingColor;
-            this.chkBlink.Checked = UserSettings.Blinking;
+
+            if (UserSettings.TimeToBlink == 0)
+            {
+                this.chkBlink.Checked = false;
+            }
+            else
+            {
+                this.chkBlink.Checked = UserSettings.Blinking;
+            }
 
             this.chkCountBack.Checked = UserSettings.CountBack;
             this.btnCountBackwardsColor.BackColor = UserSettings.CountBackColor;
 
             this.nudMinutes.Value = UserSettings.BarTime / 60000;
             this.nudSeconds.Value = (UserSettings.BarTime / 1000) % 60;
-            this.nudBlinkMinutes.Value = UserSettings.TimeToBlink / 60000;
+
+            this.nudBlinkMinutes.Value = (UserSettings.BarTime - UserSettings.TimeToBlink) / 60000;
 
             Rectangle screen = Screen.PrimaryScreen.Bounds;
             this.nudLenght.Maximum = screen.Width;
@@ -244,6 +253,14 @@ namespace TomTime
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            /*
+             * Check properties
+             */
+            if (this.checkMinutes() == false)
+            {
+                return;
+            }
+
             DialogResult close = MessageBox.Show("Are you sure, you want to save these settings?", "", MessageBoxButtons.OKCancel);
 
             if (close == DialogResult.OK)
@@ -377,15 +394,37 @@ namespace TomTime
 
         private void nudBlinkMinutes_ValueChanged(object sender, EventArgs e)
         {
-            if (nudBlinkMinutes.Value > nudMinutes.Value) {
-                MessageBox.Show("Value bigger than minutes!","",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                
-                if(nudMinutes.Value > 0) {
+            this.checkMinutes();
+
+            if (nudBlinkMinutes.Value == 0)
+            {
+                this.nudBlinkMinutes.Enabled = false;
+                this.chkBlink.Checked = false;
+            }
+        }
+
+        private bool checkMinutes()
+        {
+            if (nudBlinkMinutes.Value > nudMinutes.Value)
+            {
+                MessageBox.Show("Value bigger than minutes!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (nudMinutes.Value > 0)
+                {
                     nudBlinkMinutes.Value = nudMinutes.Value - 1;
-                } else {
+                }
+                else
+                {
                     nudBlinkMinutes.Value = 0;
                 }
+                return false;
             }
+            return true;
+        }
+
+        private void chkBlink_CheckedChanged_1(object sender, EventArgs e)
+        {
+            nudBlinkMinutes.Enabled = chkBlink.Checked;
         }
     }
 }

@@ -38,14 +38,14 @@
             this.nudSeperators = new System.Windows.Forms.NumericUpDown();
             this.lblSeperators = new System.Windows.Forms.Label();
             this.btnAbort = new System.Windows.Forms.Button();
-            this.chkBlink = new System.Windows.Forms.CheckBox();
             this.btnBlinkingColor = new System.Windows.Forms.Button();
             this.lblBlinkingColor = new System.Windows.Forms.Label();
             this.btnCountBackwardsColor = new System.Windows.Forms.Button();
             this.lblCountBackwardsColor = new System.Windows.Forms.Label();
-            this.chkCountBack = new System.Windows.Forms.CheckBox();
             this.tabTabControl = new System.Windows.Forms.TabControl();
             this.tabTime = new System.Windows.Forms.TabPage();
+            this.chkBlink = new System.Windows.Forms.CheckBox();
+            this.chkCountBack = new System.Windows.Forms.CheckBox();
             this.nudBlinkMinutes = new System.Windows.Forms.NumericUpDown();
             this.lblBlinkMinutes = new System.Windows.Forms.Label();
             this.tabPosition = new System.Windows.Forms.TabPage();
@@ -83,7 +83,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetTop)).BeginInit();
             this.tabHotkeys.SuspendLayout();
             this.tabAppearance.SuspendLayout();
-            this.tabBehavior.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -183,19 +182,6 @@
             this.btnAbort.UseVisualStyleBackColor = true;
             this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
             // 
-            // chkBlink
-            // 
-            this.chkBlink.AutoSize = true;
-            this.chkBlink.Checked = true;
-            this.chkBlink.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBlink.Location = new System.Drawing.Point(3, 36);
-            this.chkBlink.Name = "chkBlink";
-            this.chkBlink.Size = new System.Drawing.Size(63, 17);
-            this.chkBlink.TabIndex = 31;
-            this.chkBlink.Text = "Blinking";
-            this.chkBlink.UseVisualStyleBackColor = true;
-            this.chkBlink.CheckedChanged += new System.EventHandler(this.chkBlink_CheckedChanged);
-            // 
             // btnBlinkingColor
             // 
             this.btnBlinkingColor.BackColor = System.Drawing.Color.IndianRed;
@@ -234,18 +220,6 @@
             this.lblCountBackwardsColor.TabIndex = 36;
             this.lblCountBackwardsColor.Text = "Colour when counting back";
             // 
-            // chkCountBack
-            // 
-            this.chkCountBack.AutoSize = true;
-            this.chkCountBack.Checked = true;
-            this.chkCountBack.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCountBack.Location = new System.Drawing.Point(3, 13);
-            this.chkCountBack.Name = "chkCountBack";
-            this.chkCountBack.Size = new System.Drawing.Size(110, 17);
-            this.chkCountBack.TabIndex = 38;
-            this.chkCountBack.Text = "Count Backwards";
-            this.chkCountBack.UseVisualStyleBackColor = true;
-            // 
             // tabTabControl
             // 
             this.tabTabControl.Controls.Add(this.tabTime);
@@ -262,6 +236,8 @@
             // tabTime
             // 
             this.tabTime.BackColor = System.Drawing.Color.Transparent;
+            this.tabTime.Controls.Add(this.chkBlink);
+            this.tabTime.Controls.Add(this.chkCountBack);
             this.tabTime.Controls.Add(this.nudBlinkMinutes);
             this.tabTime.Controls.Add(this.lblBlinkMinutes);
             this.tabTime.Controls.Add(this.nudMinutes);
@@ -275,9 +251,34 @@
             this.tabTime.Text = "Time";
             this.tabTime.UseVisualStyleBackColor = true;
             // 
+            // chkBlink
+            // 
+            this.chkBlink.AutoSize = true;
+            this.chkBlink.Checked = true;
+            this.chkBlink.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBlink.Location = new System.Drawing.Point(9, 58);
+            this.chkBlink.Name = "chkBlink";
+            this.chkBlink.Size = new System.Drawing.Size(63, 17);
+            this.chkBlink.TabIndex = 39;
+            this.chkBlink.Text = "Blinking";
+            this.chkBlink.UseVisualStyleBackColor = true;
+            this.chkBlink.CheckedChanged += new System.EventHandler(this.chkBlink_CheckedChanged_1);
+            // 
+            // chkCountBack
+            // 
+            this.chkCountBack.AutoSize = true;
+            this.chkCountBack.Checked = true;
+            this.chkCountBack.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCountBack.Location = new System.Drawing.Point(9, 133);
+            this.chkCountBack.Name = "chkCountBack";
+            this.chkCountBack.Size = new System.Drawing.Size(110, 17);
+            this.chkCountBack.TabIndex = 40;
+            this.chkCountBack.Text = "Count Backwards";
+            this.chkCountBack.UseVisualStyleBackColor = true;
+            // 
             // nudBlinkMinutes
             // 
-            this.nudBlinkMinutes.Location = new System.Drawing.Point(9, 59);
+            this.nudBlinkMinutes.Location = new System.Drawing.Point(9, 94);
             this.nudBlinkMinutes.Maximum = new decimal(new int[] {
             1560,
             0,
@@ -286,11 +287,12 @@
             this.nudBlinkMinutes.Name = "nudBlinkMinutes";
             this.nudBlinkMinutes.Size = new System.Drawing.Size(42, 20);
             this.nudBlinkMinutes.TabIndex = 36;
+            this.nudBlinkMinutes.ValueChanged += new System.EventHandler(this.nudBlinkMinutes_ValueChanged);
             // 
             // lblBlinkMinutes
             // 
             this.lblBlinkMinutes.AutoSize = true;
-            this.lblBlinkMinutes.Location = new System.Drawing.Point(6, 43);
+            this.lblBlinkMinutes.Location = new System.Drawing.Point(6, 78);
             this.lblBlinkMinutes.Name = "lblBlinkMinutes";
             this.lblBlinkMinutes.Size = new System.Drawing.Size(115, 13);
             this.lblBlinkMinutes.TabIndex = 37;
@@ -511,8 +513,6 @@
             // 
             // tabBehavior
             // 
-            this.tabBehavior.Controls.Add(this.chkBlink);
-            this.tabBehavior.Controls.Add(this.chkCountBack);
             this.tabBehavior.Location = new System.Drawing.Point(4, 22);
             this.tabBehavior.Name = "tabBehavior";
             this.tabBehavior.Size = new System.Drawing.Size(367, 210);
@@ -550,8 +550,6 @@
             this.tabHotkeys.PerformLayout();
             this.tabAppearance.ResumeLayout(false);
             this.tabAppearance.PerformLayout();
-            this.tabBehavior.ResumeLayout(false);
-            this.tabBehavior.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -568,12 +566,10 @@
         private System.Windows.Forms.NumericUpDown nudSeperators;
         private System.Windows.Forms.Label lblSeperators;
         private System.Windows.Forms.Button btnAbort;
-        private System.Windows.Forms.CheckBox chkBlink;
         private System.Windows.Forms.Button btnBlinkingColor;
         private System.Windows.Forms.Label lblBlinkingColor;
         private System.Windows.Forms.Button btnCountBackwardsColor;
         private System.Windows.Forms.Label lblCountBackwardsColor;
-        private System.Windows.Forms.CheckBox chkCountBack;
         private System.Windows.Forms.TabControl tabTabControl;
         private System.Windows.Forms.TabPage tabTime;
         private System.Windows.Forms.NumericUpDown nudBlinkMinutes;
@@ -600,5 +596,7 @@
         private System.Windows.Forms.TextBox txtHotkeyStart;
         private System.Windows.Forms.TabPage tabAppearance;
         private System.Windows.Forms.TabPage tabBehavior;
+        private System.Windows.Forms.CheckBox chkBlink;
+        private System.Windows.Forms.CheckBox chkCountBack;
     }
 }
