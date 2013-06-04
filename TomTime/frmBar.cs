@@ -256,6 +256,7 @@ namespace TomTime
 
         internal void Restart()
         {
+            this.Width = UserSettings.BarWidth;
             this.lblCountBack.Visible = false;
             this.CountBackSeconds = 0;
             this.CountBackTimer.Stop();
@@ -272,7 +273,6 @@ namespace TomTime
             if (UserSettings.Blinking)
             {
                 this.BlinkTimer.Stop();
-                this.Width = UserSettings.BarWidth;
             }
 
             this.BarDirection = TimerDirection.DOWNWARDS;
@@ -292,7 +292,12 @@ namespace TomTime
 
         internal void TogglePause()
         {
-            if (Timer.Enabled)
+            /*
+             * if timer is not enabled AND the bar is not ready
+             * there still can be some weird race conditions, when the tick
+             * event and the pause click are triggered at the same time.
+             * but who cares. */
+            if (Timer.Enabled /*&& (this.Width != UserSettings.BarWidth)*/)
             {
                 Timer.Pause();
                 if (UserSettings.Blinking)
@@ -300,7 +305,7 @@ namespace TomTime
                     BlinkTimer.Pause();
                 }
             }
-            else
+            else if ((this.Width != UserSettings.BarWidth))
             {
                 Timer.Resume();
                 if (UserSettings.Blinking && BarDirection != TimerDirection.UPWARDS)
