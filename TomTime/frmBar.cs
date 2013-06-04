@@ -303,7 +303,7 @@ namespace TomTime
             else
             {
                 Timer.Resume();
-                if (UserSettings.Blinking)
+                if (UserSettings.Blinking && BarDirection != TimerDirection.UPWARDS)
                 {
                     BlinkTimer.Resume();
                 }
