@@ -261,6 +261,7 @@
             this.chkBlink.Text = "Blinking";
             this.chkBlink.UseVisualStyleBackColor = true;
             this.chkBlink.CheckedChanged += new System.EventHandler(this.chkBlink_CheckedChanged_1);
+            this.chkBlink.CheckStateChanged += new System.EventHandler(this.chkBlink_CheckStateChanged);
             // 
             // chkCountBack
             // 

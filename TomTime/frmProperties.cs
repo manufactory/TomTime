@@ -426,5 +426,10 @@ namespace TomTime
         {
             nudBlinkMinutes.Enabled = chkBlink.Checked;
         }
+
+        private void chkBlink_CheckStateChanged(object sender, EventArgs e)
+        {
+            checkMinutes();
+        }
     }
 }
