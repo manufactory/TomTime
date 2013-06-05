@@ -69,7 +69,6 @@
             this.lblHotKeyStart = new System.Windows.Forms.Label();
             this.txtHotkeyStart = new System.Windows.Forms.TextBox();
             this.tabAppearance = new System.Windows.Forms.TabPage();
-            this.tabBehavior = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeperators)).BeginInit();
@@ -226,7 +225,6 @@
             this.tabTabControl.Controls.Add(this.tabPosition);
             this.tabTabControl.Controls.Add(this.tabHotkeys);
             this.tabTabControl.Controls.Add(this.tabAppearance);
-            this.tabTabControl.Controls.Add(this.tabBehavior);
             this.tabTabControl.Location = new System.Drawing.Point(12, 12);
             this.tabTabControl.Name = "tabTabControl";
             this.tabTabControl.SelectedIndex = 0;
@@ -511,15 +509,6 @@
             this.tabAppearance.Text = "Appearance";
             this.tabAppearance.UseVisualStyleBackColor = true;
             // 
-            // tabBehavior
-            // 
-            this.tabBehavior.Location = new System.Drawing.Point(4, 22);
-            this.tabBehavior.Name = "tabBehavior";
-            this.tabBehavior.Size = new System.Drawing.Size(367, 210);
-            this.tabBehavior.TabIndex = 4;
-            this.tabBehavior.Text = "Behavior";
-            this.tabBehavior.UseVisualStyleBackColor = true;
-            // 
             // frmProperties
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -595,7 +584,6 @@
         private System.Windows.Forms.Label lblHotKeyStart;
         private System.Windows.Forms.TextBox txtHotkeyStart;
         private System.Windows.Forms.TabPage tabAppearance;
-        private System.Windows.Forms.TabPage tabBehavior;
         private System.Windows.Forms.CheckBox chkBlink;
         private System.Windows.Forms.CheckBox chkCountBack;
     }
