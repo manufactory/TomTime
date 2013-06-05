@@ -51,9 +51,9 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(51, 13);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(69, 13);
+            this.lblName.Size = new System.Drawing.Size(78, 13);
             this.lblName.TabIndex = 1;
-            this.lblName.Text = "TomTime 0.2";
+            this.lblName.Text = "TomTime 0.2.1";
             // 
             // lblLicence
             // 
